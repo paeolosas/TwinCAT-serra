@@ -4,7 +4,6 @@
     <Declaration><![CDATA[PROGRAM main
 VAR
 	//attuatori
-	Comando : BOOL := TRUE;
 	AttuatBraccioGiu : BOOL := FALSE;
 	AttuatBraccioSu : BOOL := FALSE;
 	AttuatBraccioSx : BOOL := FALSE;
@@ -18,8 +17,8 @@ VAR
 	AttuatRullo : BOOL := FALSE;
 	AttuatLampada : BOOL := FALSE;
 	//sensori
-	SensoreFCBottom : BOOL := FALSE;
-	SensoreFCTop : BOOL := FALSE;
+	SensoreFCB : BOOL := FALSE;
+	SensoreFCT : BOOL := FALSE;
 	SensoreFCS : BOOL := FALSE;
 	SensoreFCD : BOOL := FALSE;
 	SensoreFineCorsaPianta2 : BOOL := FALSE;
@@ -39,7 +38,10 @@ VAR
 	SensorePianta2Pronta : BOOL := FALSE;
 	SensoreStart : BOOL := FALSE;
 	SensoreReset : BOOL := FALSE;
-	SensoreStop : BOOL := FALSE;
+	TemperaturaAttuale : INT;
+	TemperaturaOttimale : INT := 36;
+	durataGiorno : INT;
+	durataNotte : INT;
 	
 	
 	SerbatoioVuoto: BOOL;
@@ -269,7 +271,61 @@ END_VAR
                                   <l2 n="EmbeddedEntryActionProperties" />
                                   <l2 n="EmbeddedExitActionProperties" />
                                   <o n="ElementList" t="SFCElementList">
-                                    <l2 n="InnerList" />
+                                    <l2 n="InnerList" cet="SFCActionAssociation">
+                                      <o>
+                                        <l2 n="Attributes" cet="SFCAttribute">
+                                          <o>
+                                            <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                                            <o n="Value" t="StringValue">
+                                              <v n="Value">"ACT01"</v>
+                                              <v n="DefaultValue">""</v>
+                                            </o>
+                                            <v n="Id">1964L</v>
+                                            <v n="IdParent">1963L</v>
+                                          </o>
+                                          <o>
+                                            <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                                            <o n="Value" t="StringValue">
+                                              <v n="Value">""</v>
+                                              <v n="DefaultValue">""</v>
+                                            </o>
+                                            <v n="Id">1965L</v>
+                                            <v n="IdParent">1963L</v>
+                                          </o>
+                                          <o>
+                                            <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                                            <o n="Value" t="BoolValue">
+                                              <v n="Value">"FALSE"</v>
+                                              <v n="DefaultValue">"FALSE"</v>
+                                            </o>
+                                            <v n="Id">1966L</v>
+                                            <v n="IdParent">1963L</v>
+                                          </o>
+                                          <o>
+                                            <v n="AttributeId">{bc882c11-1e91-4dd8-a6b8-2075724ed18b}</v>
+                                            <o n="Value" t="EnumValue">
+                                              <v n="TemplateGuid">{79a4fdd5-c859-4de4-aa8d-c03372c880c2}</v>
+                                              <n n="BaseType" />
+                                              <v n="Value">"0"</v>
+                                              <v n="DefaultValue">"0"</v>
+                                            </o>
+                                            <v n="Id">1967L</v>
+                                            <v n="IdParent">1963L</v>
+                                          </o>
+                                          <o>
+                                            <v n="AttributeId">{e174fc0d-80b0-4a9e-a530-ca239c249a50}</v>
+                                            <o n="Value" t="StringValue">
+                                              <v n="Value">"N"</v>
+                                              <v n="DefaultValue">""</v>
+                                            </o>
+                                            <v n="Id">1968L</v>
+                                            <v n="IdParent">1963L</v>
+                                          </o>
+                                        </l2>
+                                        <v n="Id">1963L</v>
+                                        <v n="IdParent">692L</v>
+                                      </o>
+                                    </l2>
                                   </o>
                                   <l2 n="Attributes" cet="SFCAttribute">
                                     <o>
@@ -391,7 +447,7 @@ END_VAR
                                                 <o>
                                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                   <o n="Value" t="StringValue">
-                                                    <v n="Value">"THot"</v>
+                                                    <v n="Value">"TRANS02"</v>
                                                     <v n="DefaultValue">""</v>
                                                   </o>
                                                   <v n="Id">705L</v>
@@ -678,7 +734,7 @@ END_VAR
                                                 <o>
                                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                   <o n="Value" t="StringValue">
-                                                    <v n="Value">"TCold"</v>
+                                                    <v n="Value">"TRANS03"</v>
                                                     <v n="DefaultValue">""</v>
                                                   </o>
                                                   <v n="Id">1070L</v>
@@ -965,7 +1021,7 @@ END_VAR
                                                 <o>
                                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                   <o n="Value" t="StringValue">
-                                                    <v n="Value">"TOK"</v>
+                                                    <v n="Value">"TRANS04"</v>
                                                     <v n="DefaultValue">""</v>
                                                   </o>
                                                   <v n="Id">1131L</v>
@@ -7030,6 +7086,7 @@ END_VAR
             <Type n="EnumValueTemplate">{d6bfe4f0-d62f-4b5f-9f95-2bbeb1950e28}</Type>
             <Type n="Guid">System.Guid</Type>
             <Type n="Int64">System.Int64</Type>
+            <Type n="SFCActionAssociation">{a94bb75d-5fb3-40ad-9d01-41d5b980784d}</Type>
             <Type n="SFCAttribute">{21f3f16e-04fa-4637-b6b7-d84e4192e99f}</Type>
             <Type n="SFCAttributeCategory">{679adacf-f2a4-4167-a3f7-d21cfc5d451f}</Type>
             <Type n="SFCAttributeDescription">{d851789d-af2c-4990-9d48-a7bdc9181773}</Type>
@@ -7048,13 +7105,35 @@ END_VAR
     </Implementation>
     <Action Name="ACT01" Id="{34dc420b-8947-4eec-a99d-0800aaf6b17a}">
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF TemperaturaAttuale < TemperaturaOttimale-5 THEN
+	SensoreTempFredda := TRUE;
+	SensoreTempCalda := FALSE;
+	
+ELSIF TemperaturaAttuale > TemperaturaOttimale+5 THEN
+	SensoreTempCalda := TRUE;
+	SensoreTempFredda := FALSE;
+END_IF]]></ST>
       </Implementation>
     </Action>
     <Transition Name="TRANS01" Id="{58dfda41-c2f0-40b5-97e0-a48c1eae994f}">
       <Implementation>
         <ST><![CDATA[SensoreStart = TRUE AND SensoreFCTop= TRUE AND SensoreFCD = TRUE AND SensoreRulloOccupato = FALSE;
 ]]></ST>
+      </Implementation>
+    </Transition>
+    <Transition Name="TRANS02" Id="{fa3cf8e0-8591-4adf-b11d-d748c3d06fc1}">
+      <Implementation>
+        <ST><![CDATA[SensoreTempCalda := TRUE;]]></ST>
+      </Implementation>
+    </Transition>
+    <Transition Name="TRANS03" Id="{b6f3ed56-5c9a-4f33-b947-956276a472c1}">
+      <Implementation>
+        <ST><![CDATA[SensoreTempFredda := TRUE;]]></ST>
+      </Implementation>
+    </Transition>
+    <Transition Name="TRANS04" Id="{94dadf6a-ce5d-498f-980d-b2643ed6d930}">
+      <Implementation>
+        <ST><![CDATA[TemperaturaAttuale = TemperaturaOttimale;]]></ST>
       </Implementation>
     </Transition>
     <ObjectProperties>
@@ -7153,10 +7232,23 @@ END_VAR
       </XmlArchive>
     </ObjectProperties>
     <LineIds Name="main.ACT01">
-      <LineId Id="1" Count="0" />
+      <LineId Id="1" Count="1" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="7" Count="2" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="3" Count="0" />
     </LineIds>
     <LineIds Name="main.TRANS01">
       <LineId Id="1" Count="1" />
+    </LineIds>
+    <LineIds Name="main.TRANS02">
+      <LineId Id="1" Count="0" />
+    </LineIds>
+    <LineIds Name="main.TRANS03">
+      <LineId Id="1" Count="0" />
+    </LineIds>
+    <LineIds Name="main.TRANS04">
+      <LineId Id="1" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
