@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.66">
+	<Project ProjectGUID="{B39C35AD-1C5D-47FB-89C0-63C84172F856}" Target64Bit="true" ShowHideConfigurations="#x6">
+		<System>
+			<Settings MaxCpus="4" NonWinCpus="1">
+				<Cpu CpuId="3"/>
+			</Settings>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{841078C0-68C9-456A-9C85-0D06EC155702}" Name="PLCserra" PrjFilePath="PLCserra\PLCserra.plcproj" TmcFilePath="PLCserra\PLCserra.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLCserra\PLCserra.tmc" TmcHash="{669B29E3-C513-AD31-F806-8D4B0A73583B}">
+					<Name>PLCserra Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id>0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+	</Project>
+</TcSmProject>
