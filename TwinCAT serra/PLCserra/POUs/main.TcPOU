@@ -4,6 +4,7 @@
     <Declaration><![CDATA[PROGRAM main
 VAR
 	//attuatori
+	Comando : BOOL := TRUE;
 	AttuatBraccioGiu : BOOL := FALSE;
 	AttuatBraccioSu : BOOL := FALSE;
 	AttuatBraccioSx : BOOL := FALSE;
@@ -7045,6 +7046,11 @@ END_VAR
         </XmlArchive>
       </SFC>
     </Implementation>
+    <Action Name="ACT01" Id="{34dc420b-8947-4eec-a99d-0800aaf6b17a}">
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Action>
     <Transition Name="TRANS01" Id="{58dfda41-c2f0-40b5-97e0-a48c1eae994f}">
       <Implementation>
         <ST><![CDATA[SensoreStart = TRUE AND SensoreFCTop= TRUE AND SensoreFCD = TRUE AND SensoreRulloOccupato = FALSE;
@@ -7146,6 +7152,9 @@ END_VAR
         </TypeList>
       </XmlArchive>
     </ObjectProperties>
+    <LineIds Name="main.ACT01">
+      <LineId Id="1" Count="0" />
+    </LineIds>
     <LineIds Name="main.TRANS01">
       <LineId Id="1" Count="1" />
     </LineIds>
