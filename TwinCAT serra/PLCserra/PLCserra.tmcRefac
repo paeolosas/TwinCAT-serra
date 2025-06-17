@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Refactors>
+  <Renames>
+    <RenamedType>
+      <Type guid="34dc420b-8947-4eec-a99d-0800aaf6b17a">ACT01</Type>
+      <From>ACT01</From>
+      <To>ACTTCheck</To>
+    </RenamedType>
+    <RenamedType>
+      <Type guid="519471eb-ffb2-4ed3-b156-5af6a0715aca">ACT02</Type>
+      <From>ACT02</From>
+      <To>ACTTOttimale</To>
+    </RenamedType>
+  </Renames>
+</Refactors>
