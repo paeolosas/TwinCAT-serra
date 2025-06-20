@@ -9546,7 +9546,7 @@ AttuatBraccioDx := TRUE;
     </Transition>
     <Transition Name="IsPiena" Id="{63e11183-3cf8-47bb-82d5-d9d53dcdc247}">
       <Implementation>
-        <ST><![CDATA[SensoreSerbatoioOn = FALSE]]></ST>
+        <ST><![CDATA[SensoreSerbatoioOn = FALSE AND SensoreVascaVuota = FALSE]]></ST>
       </Implementation>
     </Transition>
     <Transition Name="IsReady1" Id="{9e132d8b-2a78-47ee-b282-a7deb61649ab}">
@@ -9581,7 +9581,8 @@ AttuatBraccioDx := TRUE;
     </Transition>
     <Transition Name="IsVuota" Id="{4b8a749a-f6bf-41b8-a28c-bad04e7416cc}">
       <Implementation>
-        <ST><![CDATA[SensoreVascaVuota = TRUE AND SensoreSerbatoioEmpty = FALSE //AND SensoreSerbatoioOn = TRUE]]></ST>
+        <ST><![CDATA[ //AND SensoreSerbatoioOn = TRUE
+SensoreVascaVuota = TRUE AND SensoreSerbatoioEmpty = FALSE]]></ST>
       </Implementation>
     </Transition>
     <Transition Name="OnPianta" Id="{9c1dbab7-9789-41cb-ac9e-c6e376fa63e8}">
@@ -9895,7 +9896,7 @@ AttuatBraccioDx := TRUE;
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="main.IsVuota">
-      <LineId Id="1" Count="0" />
+      <LineId Id="1" Count="1" />
     </LineIds>
     <LineIds Name="main.OnPianta">
       <LineId Id="1" Count="0" />

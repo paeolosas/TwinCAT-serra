@@ -13,7 +13,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{841078C0-68C9-456A-9C85-0D06EC155702}" Name="PLCserra" PrjFilePath="PLCserra\PLCserra.plcproj" TmcFilePath="PLCserra\PLCserra.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLCserra\PLCserra.tmc" TmcHash="{D510884F-8E76-744A-DD7E-8A1F308AA66A}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLCserra\PLCserra.tmc" TmcHash="{606021F8-0C50-2597-BCCE-098062A0320D}">
 					<Name>PLCserra Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
