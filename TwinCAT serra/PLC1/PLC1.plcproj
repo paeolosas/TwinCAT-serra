@@ -8,7 +8,7 @@
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>PLCserra</Name>
+    <Name>PLC1</Name>
     <ProgramVersion>3.1.4024.0</ProgramVersion>
     <Application>{1ae1d7b4-481c-479b-9648-f360e71ecbca}</Application>
     <TypeSystem>{3f989609-3134-4f2f-8fee-281320dfa7c4}</TypeSystem>
@@ -46,7 +46,7 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PLCserra.tmc">
+    <None Include="PLC1.tmc">
       <SubType>Content</SubType>
     </None>
   </ItemGroup>

@@ -15,6 +15,7 @@ VAR
 	SensoreRelease : BOOL := FALSE;
 	SensoreRulloOccupato : BOOL := FALSE;
 	SensoreVascaVuota : BOOL := FALSE;
+	{attribute 'OPC.UA.DA' := '1'}
 	SensoreIsGiorno : BOOL := FALSE;
 	SensoreSerbatoioOn : BOOL := FALSE;
 	SensoreSerbatoioFull : BOOL := TRUE;
@@ -43,12 +44,18 @@ VAR
 	//WatchDog e Allarme
 	WatchDog : TON;
 	TimerWatchDog : TIME := TIME#10S;
+	{attribute 'OPC.UA.DA' := '1'}
 	Allarme1 : BOOL := FALSE;
+	{attribute 'OPC.UA.DA' := '1'}
 	ContatorePiante : INT := 0;
 	
 	//Variabili RunTime per SCADA
+	{attribute 'OPC.UA.DA' := '1'}
 	Temperatura : LREAL;
+	{attribute 'OPC.UA.DA' := '1'}
 	Ossigeno: LREAL;
+	
+	AggiuntoPianta : BOOL := FALSE;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -9356,7 +9363,10 @@ AttuatRullo := TRUE;
     </Action>
     <Action Name="ACTNumeroPiante" Id="{f2880276-3cc8-44f8-89bd-f88c0e4bed82}">
       <Implementation>
-        <ST><![CDATA[ContatorePiante := ContatorePiante+1;]]></ST>
+        <ST><![CDATA[IF AggiuntoPianta = FALSE THEN
+	ContatorePiante := ContatorePiante+1;
+	AggiuntoPianta := TRUE;
+END_IF]]></ST>
       </Implementation>
     </Action>
     <Action Name="ACTPrelievo" Id="{f35df336-bc57-415e-98f9-5457ec708268}">
@@ -9371,6 +9381,7 @@ AttuatBraccioSu := TRUE;
         <ST><![CDATA[AttuatBraccioGiu := FALSE;
 AttuatBraccioPresa := TRUE;
 WatchDog(IN := FALSE, PT := TimerWatchDog);
+AggiuntoPianta := FALSE;
 ]]></ST>
       </Implementation>
     </Action>
@@ -9501,7 +9512,7 @@ AttuatBraccioDx := TRUE;
     </Transition>
     <Transition Name="ENDRullo" Id="{431f1e4b-6835-4c70-bac9-98c2446fb5fa}">
       <Implementation>
-        <ST><![CDATA[SensoreRulloOccupato = FALSE //AND(SensorePianta1Pronta = FALSE OR SensorePianta2Pronta = FALSE)]]></ST>
+        <ST><![CDATA[SensoreRulloOccupato = FALSE]]></ST>
       </Implementation>
     </Transition>
     <Transition Name="ENDSerbatoio" Id="{8e039238-1019-4833-85cf-f7294c62ef24}">
@@ -9758,6 +9769,9 @@ SensoreVascaVuota = TRUE AND SensoreSerbatoioEmpty = FALSE]]></ST>
     </LineIds>
     <LineIds Name="main.ACTNumeroPiante">
       <LineId Id="1" Count="0" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="main.ACTPrelievo">
       <LineId Id="3" Count="0" />
@@ -9767,7 +9781,7 @@ SensoreVascaVuota = TRUE AND SensoreSerbatoioEmpty = FALSE]]></ST>
     <LineIds Name="main.ACTPresa">
       <LineId Id="3" Count="0" />
       <LineId Id="1" Count="0" />
-      <LineId Id="4" Count="0" />
+      <LineId Id="4" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="main.ACTRaffreddaScalda">
